@@ -1,15 +1,45 @@
 <div class="login-container">
-  <h1>{{ pageTitle }}</h1>
+    <h1>{{ pageTitle }}</h1>
 
-  <div class="form-group">
-    <label for="email">Email Address</label>
-    <input 
-      type="email" 
-      id="email" 
-      [formControl]="emailControl" 
-      placeholder="Enter your email"
-    />
-  </div>
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <div class="form-field">
+            <label for="username">Name</label>
+            <input 
+                type="text"
+                id="username"
+                formControlName="username"
+                placeholder="Enter your Name"
+                [class.invalid-input]="username.invalid && username.touched"
+            />
 
-  <p>Live Typing Output: <strong>{{ emailControl.value }}</strong></p>
+            @if (username.invalid && username.touched) {
+                <div class="error-msg">Name is required.</div>
+            }
+        </div>
+
+        <div class="form-field">
+            <label for="password">Password</label>
+            <input 
+                id="password" 
+                type="password" 
+                formControlName="password" 
+                placeholder="Enter your password"
+                [class.invalid-input]="password.invalid && password.touched"
+            />
+
+            @if (password.touched) {
+                @if (password.errors?.['required']) {
+                <div class="error-msg">Password is required.</div>
+                } @else if (password.errors?.['minlength']) {
+                <div class="error-msg">Password must be at least 6 characters long.</div>
+                }
+            }
+        </div>
+
+        <button type="submit" [disabled]="loginForm.invalid" class="submit-btn">
+            Login
+        </button>
+    </form>
+    
+
 </div>

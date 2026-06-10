@@ -1,0 +1,78 @@
+.login-container {
+  max-width: 400px;
+  margin: 4rem auto;
+  padding: 2rem;
+  border: 1px solid #74659f;
+  border-radius: 8px;
+  background-color: #eeeff2;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  font-family: Arial, sans-serif;
+}
+
+h1 {
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+  color: rgb(90, 43, 128)
+}
+
+.form-field {
+  margin-bottom: 1.25rem;
+}
+
+label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: #1d263c;
+}
+
+input {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #19133e;
+  border-radius: 4px;
+  box-sizing: border-box;
+  font-size: 1rem;
+  transition: border-color 0.2s ease;
+}
+
+input:focus {
+  outline: none;
+  border-color: #0066cc;
+}
+
+/* Red error state applied conditionally via [class.invalid-input] */
+.invalid-input {
+  border-color: #dc3545 !important;
+  background-color: #fef3f3 !important;
+}
+
+.error-msg {
+  color: #dc3545;
+  font-size: 0.8rem;
+  margin-top: 0.25rem;
+}
+
+.submit-btn {
+  width: 100%;
+  padding: 0.75rem;
+  background-color: #0066cc;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.submit-btn:hover:not(:disabled) {
+  background-color: #0052a3;
+}
+
+/* Button dims out when the form state is invalid */
+.submit-btn:disabled {
+  background-color: #949393;
+  cursor: not-allowed;
+}
