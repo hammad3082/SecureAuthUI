@@ -1,1 +1,16 @@
-<p>overview works!</p>
+<div style="padding: 24px; font-family: sans-serif;">
+  <h2>Dashboard Overview</h2>
+  <hr />
+
+  @if (errorMessage()) {
+    <div style="color: red; padding: 10px; background-color: #ffe6e6; border-radius: 4px;">
+      {{ errorMessage() }}
+    </div>
+  }
+
+  @if (apiMessage()) {
+    <div style="color: green; padding: 10px; background-color: #e6f7e6; border-radius: 4px; font-weight: bold;">
+      {{ apiMessage() }}
+    </div>
+  }
+</div>

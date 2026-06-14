@@ -1,6 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { ReactiveFormsModule, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Auth } from '../../../../core/auth/services/auth';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-login',
   imports: [ReactiveFormsModule],
@@ -9,6 +10,7 @@ import { Auth } from '../../../../core/auth/services/auth';
 })
 export class LoginPage {
   private authService = inject(Auth);
+  private router = inject(Router);
 
   pageTitle = 'Secure Login Portal';
 
@@ -39,12 +41,12 @@ export class LoginPage {
     this.authService.login(loginPayload).subscribe(
       {
         next: (response) => {
-          console.log('Login successful! JWT Token received:', response.accessToken);
-
-          // TODO: Save token to localStorage and navigate to dashboard
+          console.log('Token is safely cached in Local Storage!');
+          
+          this.router.navigate(['/dashboard'])
         },
         error: (apiError) => {
-          console.log('Authentication failed:', apiError);
+          console.error('Authentication failed:', apiError);
         
           // TODO: Display an error message banner on the UI
         }
