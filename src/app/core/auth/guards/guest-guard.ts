@@ -2,7 +2,7 @@ import { inject } from '@angular/core';
 import { CanActivateFn, Router } from '@angular/router';
 import { Storage } from '../services/storage.service';
 
-export const authGuard: CanActivateFn = (route, state) => {
+export const guestGuard: CanActivateFn = (route, state) => {
   const storage = inject(Storage)
   const router = inject(Router)
 
@@ -11,10 +11,12 @@ export const authGuard: CanActivateFn = (route, state) => {
   const token = storage.getItem(AUTH_KEY);
 
   if(token)
-    return true;
+  {
+    console.log('Guest Guard Blocking.. Routing away from /auth')
+
+    router.navigate(['/dashboard']);
+    return false;
+  }
   
-  console.log('Auth Guard Blocking.. Routing to Login')
-  
-  router.navigate(['/auth/login'])
-  return false;
+  return true;
 };
