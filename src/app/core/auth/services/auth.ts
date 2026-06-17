@@ -13,6 +13,7 @@ export class Auth {
 
   private apiUrl = "https://localhost:7254/api/Auth";
   private readonly AUTH_KEY = 'auth_token';
+  private readonly REFRESH_KEY = 'refresh_token';
 
   login(credentials: LoginRequest): Observable<LoginResponse> {
     return this.http.post<LoginResponse>(`${this.apiUrl}/login`, credentials)
@@ -20,8 +21,23 @@ export class Auth {
         tap(response => {// 'tap' catches the successful HTTP 200 payload automatically
           if(response && response.accessToken){
             this.storage.setItem(this.AUTH_KEY, response.accessToken);
+            this.storage.setItem(this.REFRESH_KEY, response.refreshToken);
+
+            console.info('Logined in Successfully')
           }
         })
       );
+  }
+
+  refreshToken(): Observable<any> {
+    const RefreshToken = this.storage.getItem(this.REFRESH_KEY);
+
+    console.log('Calling Refresh Token API');
+
+    return this.http.post<any>(`${this.apiUrl}/refresh-token`, { RefreshToken }).pipe(
+      tap(response => {
+        this.storage.setItem(this.AUTH_KEY, response.accessToken);
+      })
+    );
   }
 }
