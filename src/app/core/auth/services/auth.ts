@@ -3,6 +3,7 @@ import { inject, Injectable } from '@angular/core';
 import { Observable, tap } from 'rxjs';
 import { LoginRequest, LoginResponse } from '../../../features/auth/models/login.model';
 import { Storage } from './storage.service';
+import { RegisterRequest } from '../../../features/auth/models/register.model';
 
 @Injectable({
   providedIn: 'root',
@@ -39,5 +40,10 @@ export class Auth {
         this.storage.setItem(this.AUTH_KEY, response.accessToken);
       })
     );
+  }
+
+  register(details: RegisterRequest): Observable<any> {
+    console.log('register payload: ', details)
+    return this.http.post<LoginResponse>(`${this.apiUrl}/register`, details);
   }
 }

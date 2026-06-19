@@ -13,6 +13,11 @@ export class OverviewPage {
   apiMessage = signal<string>('Loading secure message...');
   errorMessage = signal<string | null>(null);
 
+  crashToken(): void{
+    console.log('in crashToken page');
+    this.SampleService.crashToken();
+  }
+
   ngOnInit() : void{
     this.SampleService.getProtectedData().subscribe({
       next: (message) => {
