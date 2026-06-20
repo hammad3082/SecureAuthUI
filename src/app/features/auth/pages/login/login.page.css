@@ -76,3 +76,26 @@ input:focus {
   background-color: #949393;
   cursor: not-allowed;
 }
+
+.auth-navigation {
+  margin-top: 20px;
+  text-align: center;
+  font-size: 14px;
+}
+
+.auth-navigation p {
+  color: #666666;
+  margin: 0;
+}
+
+.auth-navigation a {
+  color: #0066cc;
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.15s ease;
+}
+
+.auth-navigation a:hover {
+  color: #0052a3;
+  text-decoration: underline;
+}

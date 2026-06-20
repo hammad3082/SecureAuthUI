@@ -1,0 +1,122 @@
+/* Container Layout */
+.register-container {
+  max-width: 450px;
+  margin: 60px auto;
+  padding: 30px;
+  background: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+h2 {
+  margin-top: 0;
+  margin-bottom: 24px;
+  color: #1a1a1a;
+  font-size: 24px;
+  font-weight: 600;
+  text-align: center;
+}
+
+/* Form Groups */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+div {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+label {
+  font-size: 14px;
+  font-weight: 500;
+  color: #4a4a4a;
+}
+
+/* Input Fields */
+input {
+  padding: 10px 14px;
+  font-size: 15px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #fff;
+  color: #333;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  outline: none;
+}
+
+input:focus {
+  border-color: #0066cc;
+  box-shadow: 0 0 0 3px rgba(0, 102, 204, 0.15);
+}
+
+/* Error States */
+.error {
+  font-size: 12px;
+  color: #dc3545;
+  font-weight: 500;
+  margin-top: 2px;
+}
+
+/* Target elements when the native signal form marks them invalid */
+input.ng-invalid.ng-touched {
+  border-color: #dc3545;
+  background-color: #fff8f8;
+}
+
+input.ng-invalid.ng-touched:focus {
+  box-shadow: 0 0 0 3px rgba(220, 53, 69, 0.15);
+}
+
+/* Action Button */
+button[type="submit"] {
+  margin-top: 10px;
+  padding: 12px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #ffffff;
+  background-color: #0066cc;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+
+button[type="submit"]:hover:not(:disabled) {
+  background-color: #0052a3;
+}
+
+/* Disabled / Submitting States */
+button[type="submit"]:disabled {
+  background-color: #cccccc;
+  color: #888888;
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+.auth-navigation {
+  margin-top: 20px;
+  text-align: center;
+  font-size: 14px;
+}
+
+.auth-navigation p {
+  color: #666666;
+  margin: 0;
+}
+
+.auth-navigation a {
+  color: #0066cc;
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.15s ease;
+}
+
+.auth-navigation a:hover {
+  color: #0052a3;
+  text-decoration: underline;
+}

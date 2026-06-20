@@ -11,6 +11,7 @@ export class Sample {
   private storage = inject(Storage)
 
   private readonly AUTH_KEY = 'auth_token';
+  private readonly REFRESH_KEY = 'refresh_token';
 
   private apiUrl = "https://localhost:7254/api/Sample";
 
@@ -18,8 +19,8 @@ export class Sample {
     return this.http.get(`${this.apiUrl}/protected`, {responseType: 'text'});
   }
 
-  crashToken(): void{
-    console.log('in sample services crashToken method');
-    this.storage.setItem(this.AUTH_KEY, 'ssdesds');
+  RemoveTokens(): void{
+    this.storage.removeItem(this.AUTH_KEY);
+    this.storage.removeItem(this.REFRESH_KEY);
   }
 }

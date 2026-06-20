@@ -38,4 +38,7 @@
             {{ registerForm().submitting() ? 'Registering...' : 'Register' }}
         </button>
     </form>
+    <div class="auth-navigation">
+        <p>Already have an account? <a [routerLink]="['/auth/login']">Log in here</a></p>
+    </div>
 </div>

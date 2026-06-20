@@ -1,14 +1,14 @@
 import { Component, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { form, required, email, minLength, validate, FormField, FormRoot } from '@angular/forms/signals';
 import { RegisterRequest } from '../../models/register.model';
 import { Auth } from '../../../../core/auth/services/auth';
 import { firstValueFrom } from 'rxjs';
 @Component({
   selector: 'app-register',
-  imports: [CommonModule, FormField, FormRoot],
+  imports: [CommonModule, FormField, FormRoot, RouterLink],
   templateUrl: './register.page.html',
   styleUrl: './register.page.css',
 })
