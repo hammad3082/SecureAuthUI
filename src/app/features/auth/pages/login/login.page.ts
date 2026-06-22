@@ -3,6 +3,7 @@ import { ReactiveFormsModule, FormControl, FormGroup, Validators } from '@angula
 import { Auth } from '../../../../core/auth/services/auth';
 import { Router } from '@angular/router';
 import { RouterLink } from '@angular/router';
+import { firstValueFrom } from 'rxjs';
 @Component({
   selector: 'app-login',
   imports: [ReactiveFormsModule, RouterLink],
@@ -53,5 +54,17 @@ export class LoginPage {
         }
       }
     )
+  }
+
+  async loginWithGoogle(): Promise<void> {
+    try {
+      const response = await firstValueFrom(this.authService.getExternalLoginUrl('Google'));
+      console.log('external auth response', response);
+      window.location.href = response.loginUrl;
+      //window.open(response.loginUrl, '_blank');
+
+    } catch (err) {
+      console.error('Failed to retrieve external provider login URL:', err);
+    }
   }
 }

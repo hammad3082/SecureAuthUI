@@ -4,6 +4,7 @@ import { Observable, tap } from 'rxjs';
 import { LoginRequest, LoginResponse } from '../../../features/auth/models/login.model';
 import { Storage } from './storage.service';
 import { RegisterRequest } from '../../../features/auth/models/register.model';
+import { ExternalLoginResponse } from '../../../features/auth/models/ExternalAuth.model';
 
 @Injectable({
   providedIn: 'root',
@@ -45,5 +46,11 @@ export class Auth {
   register(details: RegisterRequest): Observable<any> {
     console.log('register payload: ', details)
     return this.http.post<LoginResponse>(`${this.apiUrl}/register`, details);
+  }
+
+  getExternalLoginUrl(provider: string): Observable<ExternalLoginResponse> {
+    return this.http.get<ExternalLoginResponse>(
+      `${this.apiUrl}/external/login?provider=${provider}`
+    );
   }
 }

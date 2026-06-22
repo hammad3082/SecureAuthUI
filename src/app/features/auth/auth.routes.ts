@@ -10,6 +10,10 @@ export const AUTH_ROUTES: Routes =[
         loadComponent: () => import('./pages/register/register.page').then(m => m.RegisterPage)
     },
     {
+        path: 'callback',
+        loadComponent: () => import('./pages/callback/callback.page').then(m => m.CallbackPage)
+    },
+    {
         path: '',
         redirectTo: 'login',
         pathMatch: 'full'
