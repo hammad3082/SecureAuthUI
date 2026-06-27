@@ -71,10 +71,23 @@ input:focus {
   background-color: #0052a3;
 }
 
+.submit-btn.is-loading {
+  background-color: #528eed;
+  opacity: 0.75;
+  cursor: wait;
+}
+
 /* Button dims out when the form state is invalid */
-.submit-btn:disabled {
+.submit-btn:disabled:not(.is-loading) {
   background-color: #949393;
   cursor: not-allowed;
+}
+
+.spinner-text {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
 }
 
 .auth-navigation {
@@ -185,4 +198,66 @@ input:focus {
   background-color: #afd2e3;
   outline: none;
   box-shadow: 0 0 0 3px rgba(66, 133, 244, 0.15);
+}
+
+.fullscreen-loader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  /* Using a modern backdrop-filter blur makes it look incredibly slick */
+  background: rgba(255, 255, 255, 0.75); 
+  backdrop-filter: blur(4px); 
+  
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+/* Modernized Spinner */
+.spinner {
+  border: 3px solid #e2e8f0; /* Muted gray base track */
+  border-top: 3px solid #4285F4; /* Vibrant Google Blue */
+  border-radius: 50%;
+  width: 44px;
+  height: 44px;
+  animation: spin 0.8s cubic-bezier(0.4, 0, 0.2, 1) infinite; /* Smoother easing curve */
+  margin-bottom: 16px;
+}
+
+/* Polished Typography */
+.loader-text {
+  font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: #334155; /* Sophisticated slate gray instead of harsh solid black */
+  letter-spacing: 0.025em;
+  margin: 0;
+  display: flex;
+  align-items: center;
+}
+
+/* Animated ellipsis trailing effects (Optional but very pro) */
+.loader-text::after {
+  content: '...';
+  display: inline-block;
+  width: 12px;
+  text-align: left;
+  animation: dots 1.5s steps(4, end) infinite;
+}
+
+/* Keyframes */
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes dots {
+  0%, 20% { content: ''; }
+  40% { content: '.'; }
+  60% { content: '..'; }
+  80%, 100% { content: '...'; }
 }

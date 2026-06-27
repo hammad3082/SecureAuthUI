@@ -14,9 +14,12 @@ export class LoginPage {
   private authService = inject(Auth);
   private router = inject(Router);
 
-  errorMessage = signal<string| null>(null);
-
   pageTitle = 'Secure Login Portal';
+
+  isLoading = signal<boolean>(false);
+  isGoogleLoading = signal<boolean>(false);
+
+  errorMessage = signal<string| null>(null);
 
   loginForm = new FormGroup({
     username: new FormControl('', {
@@ -39,6 +42,9 @@ export class LoginPage {
       return;
     }
 
+    this.isLoading.set(true);
+    this.errorMessage.set(null);
+    
     const loginPayload = this.loginForm.getRawValue();
     console.log('Valid Form Payload:', loginPayload);
 
@@ -47,11 +53,13 @@ export class LoginPage {
         next: (response) => {
           console.log('Token is safely cached in Local Storage!');
           
+          this.isLoading.set(false);
           this.router.navigate(['/dashboard'])
         },
         error: (apiError) => {
           console.error('Authentication failed:', apiError);
-        
+          
+          this.isLoading.set(false);
           if(apiError.status === 401) {
             this.errorMessage.set('Invalid name or password. Please try again.')
           }
@@ -65,12 +73,17 @@ export class LoginPage {
 
   async loginWithGoogle(): Promise<void> {
     try {
+      this.errorMessage.set(null);
+
+      this.isGoogleLoading.set(true);
+
       const response = await firstValueFrom(this.authService.getExternalLoginUrl('Google'));
       console.log('external auth response', response);
       window.location.href = response.loginUrl;
       //window.open(response.loginUrl, '_blank');
 
     } catch (err) {
+      this.isGoogleLoading.set(false);
       console.error('Failed to retrieve external provider login URL:', err);
 
       this.errorMessage.set('An unexpected system error occurred. Please try again later.')
