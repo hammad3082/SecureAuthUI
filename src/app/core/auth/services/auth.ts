@@ -1,12 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { Observable, tap } from 'rxjs';
+import { Observable, tap, throwError } from 'rxjs';
 import { LoginRequest, LoginResponse } from '../../../features/auth/models/login.model';
 import { Storage } from './storage.service';
 import { RegisterRequest } from '../../../features/auth/models/register.model';
 import { ExternalLoginResponse } from '../../../features/auth/models/ExternalAuth.model';
 import { environment } from '../../../../environments/environment';
-
 @Injectable({
   providedIn: 'root',
 })
@@ -35,7 +34,10 @@ export class Auth {
 
   refreshToken(): Observable<any> {
     const RefreshToken = this.storage.getItem(this.REFRESH_KEY);
-
+    
+    if (!RefreshToken) {
+      return throwError(() => new Error('No refresh token available'));
+    }
     console.log('Calling Refresh Token API');
 
     return this.http.post<any>(`${this.apiUrl}/refresh-token`, { RefreshToken }).pipe(
