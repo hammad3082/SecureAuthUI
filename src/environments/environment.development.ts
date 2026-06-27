@@ -1,4 +1,4 @@
 export const environment = {
-    production: true,
-    apiUrl: 'https://secureauthdemo.onrender.com/api'
+    production: false,
+    apiUrl: 'https://localhost:7233/api'
 };
