@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { ReactiveFormsModule, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Auth } from '../../../../core/auth/services/auth';
 import { Router } from '@angular/router';
@@ -13,6 +13,8 @@ import { firstValueFrom } from 'rxjs';
 export class LoginPage {
   private authService = inject(Auth);
   private router = inject(Router);
+
+  errorMessage = signal<string| null>(null);
 
   pageTitle = 'Secure Login Portal';
 
@@ -50,7 +52,12 @@ export class LoginPage {
         error: (apiError) => {
           console.error('Authentication failed:', apiError);
         
-          // TODO: Display an error message banner on the UI
+          if(apiError.status === 401) {
+            this.errorMessage.set('Invalid name or password. Please try again.')
+          }
+          else {
+            this.errorMessage.set('An unexpected system error occurred. Please try again later.')
+          }
         }
       }
     )
@@ -65,6 +72,8 @@ export class LoginPage {
 
     } catch (err) {
       console.error('Failed to retrieve external provider login URL:', err);
+
+      this.errorMessage.set('An unexpected system error occurred. Please try again later.')
     }
   }
 }
