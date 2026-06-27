@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Storage } from '../../../core/auth/services/storage.service';
-
+import { environment } from '../../../../environments/environment';
 @Injectable({
   providedIn: 'root',
 })
@@ -13,8 +13,7 @@ export class Sample {
   private readonly AUTH_KEY = 'auth_token';
   private readonly REFRESH_KEY = 'refresh_token';
 
-  private apiUrl = "https://secureauthdemo.onrender.com/api/Sample";
-  //private apiUrl = "https://localhost:7254/api/Sample";
+  private apiUrl = `${environment.apiUrl}/Sample`;
 
   getProtectedData(): Observable<string> {
     return this.http.get(`${this.apiUrl}/protected`, {responseType: 'text'});

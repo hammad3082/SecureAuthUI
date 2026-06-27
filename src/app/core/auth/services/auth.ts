@@ -5,6 +5,7 @@ import { LoginRequest, LoginResponse } from '../../../features/auth/models/login
 import { Storage } from './storage.service';
 import { RegisterRequest } from '../../../features/auth/models/register.model';
 import { ExternalLoginResponse } from '../../../features/auth/models/ExternalAuth.model';
+import { environment } from '../../../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
@@ -13,9 +14,8 @@ export class Auth {
   private http = inject(HttpClient);
   private storage = inject(Storage);
 
-  private apiUrl = "https://secureauthdemo.onrender.com/api/Auth";
+  private apiUrl = `${environment.apiUrl}/Auth`;
 
-  //private apiUrl = "https://localhost:7254/api/Auth";
   private readonly AUTH_KEY = 'auth_token';
   private readonly REFRESH_KEY = 'refresh_token';
 
