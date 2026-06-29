@@ -4,6 +4,7 @@ import { Auth } from '../../../../core/auth/services/auth';
 import { Router } from '@angular/router';
 import { RouterLink } from '@angular/router';
 import { firstValueFrom } from 'rxjs';
+import { AppWarmUp } from '../../../../core/services/app-warm-up';
 @Component({
   selector: 'app-login',
   imports: [ReactiveFormsModule, RouterLink],
@@ -14,6 +15,12 @@ export class LoginPage {
   private authService = inject(Auth);
   private router = inject(Router);
 
+  protected warmUpService = inject(AppWarmUp)
+
+  ngOnInit(): void {
+    this.warmUpService.initiateWarmUp();
+  }
+  
   pageTitle = 'Secure Login Portal';
 
   isLoading = signal<boolean>(false);

@@ -83,3 +83,26 @@
         </div>
     }
 </div>
+
+<div class="server-status-container">
+  @switch (warmUpService.status()) {
+    @case ('checking') {
+      <div class="status-badge checking">
+        <span class="pulse-dot yellow"></span>
+        <span class="status-text">Waking up servers...</span>
+      </div>
+    }
+    @case ('healthy') {
+      <div class="status-badge healthy">
+        <span class="pulse-dot green"></span>
+        <span class="status-text">Systems Operational</span>
+      </div>
+    }
+    @case ('unhealthy') {
+      <div class="status-badge unhealthy">
+        <span class="pulse-dot red"></span>
+        <span class="status-text">Server offline. Try later.</span>
+      </div>
+    }
+  }
+</div>

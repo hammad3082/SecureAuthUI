@@ -10,6 +10,10 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes),
     provideHttpClient(
       withInterceptors([jwtInterceptor])
-    )
+    ),
+    // provideAppInitializer(() => {
+    //   const warmUpService = inject(AppWarmUp);
+    //   warmUpService.initiateWarmUp();
+    // })
   ]
 };
