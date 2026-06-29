@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Injectable, signal } from '@angular/core';
 import { environment } from '../../../environments/environment';
 
-export type ServerStatus = 'checking' | 'healthy' | 'unhealthy';
+export type ServerStatus = 'checking' | 'delayed' | 'healthy' | 'unhealthy';
 
 @Injectable({
   providedIn: 'root',
@@ -24,6 +24,12 @@ export class AppWarmUp {
     this.hasRun = true;
     
     console.log('🚀 Waking up backend and Database...');
+
+    const delayTimer = setTimeout(() => {
+      if (this.status() === 'checking') {
+        this.status.set('delayed');
+      }
+    }, 3000);
 
     this.http.get<{ status: string, warmed: Boolean}>(this.appurl).subscribe({
       next: (response) => {

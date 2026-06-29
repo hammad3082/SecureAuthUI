@@ -92,6 +92,12 @@
         <span class="status-text">Waking up servers...</span>
       </div>
     }
+    @case ('delayed') {
+      <div class="status-badge checking">
+        <span class="pulse-dot yellow"></span>
+        <span class="status-text">Cold start in progress... Spinning up backend & DB</span>
+      </div>
+    }
     @case ('healthy') {
       <div class="status-badge healthy">
         <span class="pulse-dot green"></span>
