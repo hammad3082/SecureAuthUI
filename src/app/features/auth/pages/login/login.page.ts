@@ -29,9 +29,9 @@ export class LoginPage {
   errorMessage = signal<string| null>(null);
 
   loginForm = new FormGroup({
-    username: new FormControl('', {
+    email: new FormControl('', {
       nonNullable: true,
-      validators: [Validators.required]
+      validators: [Validators.required, Validators.email]
     }),
     password: new FormControl('', {
       nonNullable: true,
@@ -39,7 +39,7 @@ export class LoginPage {
     })
   });
 
-  get username() { return this.loginForm.get('username') as FormControl; }
+  get email() { return this.loginForm.get('email') as FormControl; }
   
   get password() { return this.loginForm.get('password') as FormControl; }
 

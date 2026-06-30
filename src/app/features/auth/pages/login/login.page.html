@@ -14,17 +14,21 @@
         }
 
         <div class="form-field">
-            <label for="username">Name</label>
+            <label for="email">Email</label>
             <input 
                 type="text"
-                id="username"
-                formControlName="username"
-                placeholder="Enter your Name"
-                [class.invalid-input]="username.invalid && username.touched"
+                id="email"
+                formControlName="email"
+                placeholder="Enter your Email"
+                type = email
+                [class.invalid-input]="email.invalid && email.touched"
             />
 
-            @if (username.invalid && username.touched) {
-                <div class="error-msg">Name is required.</div>
+            @if (email.errors?.['email'] && email.touched) {
+                <div class="error-msg">Please enter a valid email address.</div>
+            }
+            @if (email.errors?.['required'] && email.touched) {
+                <div class="error-msg">Email is required.</div>
             }
         </div>
 
