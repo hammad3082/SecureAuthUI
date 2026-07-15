@@ -1,0 +1,30 @@
+<div class="dashboard-wrapper">
+  <!-- 1. The Persistent Sidebar -->
+  <aside class="sidebar">
+    <div class="sidebar-brand">
+      <h3>SecureAuth</h3>
+    </div>
+    
+    <nav class="sidebar-menu">
+      <!-- 🟢 routerLinkActive applies a highlight class automatically when the URL matches -->
+      <a routerLink="overview" routerLinkActive="active-link">
+        📊 Overview
+      </a>
+      <a routerLink="audit-logs" routerLinkActive="active-link">
+        🛡️ Audit Logs
+      </a>
+    </nav>
+  </aside>
+
+  <!-- 2. Main Work Content Window -->
+  <main class="main-content">
+    <header class="top-nav">
+      <span>System Administrator Panel</span>
+    </header>
+    
+    <section class="page-container">
+      <!-- 🟢 This is the slot where Overview or AuditLogs render dynamically -->
+      <router-outlet></router-outlet>
+    </section>
+  </main>
+</div>

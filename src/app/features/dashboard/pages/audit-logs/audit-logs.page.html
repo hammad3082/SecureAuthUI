@@ -1,0 +1,66 @@
+<div class="audit-container">
+  <h2>Security Audit Logs</h2>
+  @if (isLoading()) {
+    <div class="loading-state">Loading footprint records...</div>
+  } @else {
+    <table class="audit-table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Time</th>
+          <th>Event</th>
+          <th>Endpoint</th>
+          <th>Status</th>
+          <th>IP Address</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (log of paginationData()?.items; track log.id) {
+          <tr>
+            <td class="id-col">#{{ log.id }}</td>
+            <td class="time-col">
+              {{ log.timestamp | date:'mediumTime' }}
+              <span class="date-sub">{{ log.timestamp | date:'shortDate' }}</span>
+            </td>
+            <td><span class="event-tag">{{ log.eventType }}</span></td>
+            <td class="endpoint-col">
+              <span class="method-badge" [class]="log.requestMethod.toLowerCase()">
+                {{ log.requestMethod }}
+              </span>
+              <code>{{ log.requestPath }}</code>
+            </td>
+            <td>
+              <span class="status-badge" 
+                    [class.status-success]="log.statusCode >= 200 && log.statusCode < 300"
+                    [class.status-error]="log.statusCode >= 400">
+                {{ log.statusCode }}
+              </span>
+            </td>
+            <td class="ip-col"><code>{{ log.ipAddress }}</code></td>
+          </tr>
+        }
+      </tbody>
+    </table>
+
+    <!-- Pagination Controller Footer -->
+    <div class="pagination-footer">
+      <span class="record-count">
+        Showing page {{ paginationData()?.pageNumber }} of {{ paginationData()?.totalPages }} 
+        ({{ paginationData()?.totalCount }} total logs)
+      </span>
+      
+      <div class="pagination-buttons">
+        <button 
+          [disabled]="currentPage() === 1" 
+          (click)="loadPage(currentPage() - 1)">
+          Previous
+        </button>
+        <button 
+          [disabled]="currentPage() === paginationData()?.totalPages" 
+          (click)="loadPage(currentPage() + 1)">
+          Next
+        </button>
+      </div>
+    </div>
+  }
+</div>

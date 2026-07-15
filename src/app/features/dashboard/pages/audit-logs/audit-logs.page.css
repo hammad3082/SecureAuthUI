@@ -1,0 +1,39 @@
+.audit-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+
+.audit-table th, .audit-table td {
+  padding: 10px 12px;
+  text-align: left;
+  border-bottom: 1px solid #dee2e6;
+}
+
+/* ID & IP styling */
+.id-col { color: #888; font-weight: 500; }
+.ip-col code { background: #f1f3f5; padding: 2px 6px; border-radius: 4px; }
+
+/* HTTP Method Badges */
+.method-badge {
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 2px 6px;
+  border-radius: 4px;
+  margin-right: 6px;
+  display: inline-block;
+}
+.method-badge.post { background: #e3f2fd; color: #0d47a1; }
+.method-badge.get { background: #e8f5e9; color: #1b5e20; }
+
+/* Status Code Badges */
+.status-badge {
+  font-weight: 600;
+  padding: 4px 8px;
+  border-radius: 4px;
+}
+.status-success { background: #e8f5e9; color: #2e7d32; }
+.status-error { background: #ffebee; color: #c62828; }
+
+.event-tag { font-weight: 600; color: #4f46e5; }
+.date-sub { display: block; font-size: 0.75rem; color: #6c757d; }
