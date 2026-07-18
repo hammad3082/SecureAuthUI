@@ -1,18 +1,79 @@
-<div style="padding: 24px; font-family: sans-serif;">
-  <h2>Dashboard Overview</h2>
-  <hr />
+<div class="overview-container">
+  <!-- Header Title Section -->
+  <header class="overview-header">
+    <h1>Dashboard Overview</h1>
+    <p class="subtitle">Security Diagnostics & Active Session Tracking</p>
+  </header>
 
-  @if (errorMessage()) {
-    <div style="color: red; padding: 10px; background-color: #ffe6e6; border-radius: 4px;">
-      {{ errorMessage() }}
+  @if (isLoading()) {
+    <div class="loading-state">
+      <p>Analyzing security context...</p>
+    </div>
+  } @else if (errorMessage()) {
+    <div class="error-state">
+      <p>⚠️ {{ errorMessage() }}</p>
+    </div>
+  } @else {
+    <!-- Metric Grid -->
+    <div class="metrics-grid">
+      <!-- CARD 1: IDENTITY PASSPORT -->
+      <div class="metric-card identity">
+        <div class="card-icon">🪪</div>
+        <div class="card-content">
+          <h3>User Identity</h3>
+          <p class="main-val">{{ diagnostics()?.userName }}</p>
+          <span class="badge developer">{{ diagnostics()?.userRole }} Access</span>
+        </div>
+      </div>
+
+      <!-- CARD 2: LOGIN METHOD -->
+      <div class="metric-card security">
+        <div class="card-icon">🔐</div>
+        <div class="card-content">
+          <h3>Authentication Mode</h3>
+          <p class="main-val">{{diagnostics()?.loginMethod || 'Standard'}}</p>
+          <span class="badge secure">Verified Session</span>
+        </div>
+      </div>
+
+      <!-- CARD 3: SYSTEM INTEGRITY -->
+      <div class="metric-card system">
+        <div class="card-icon">🛡️</div>
+        <div class="card-content">
+          <h3>2FA Status</h3>
+          <p class="main-val">
+            {{ diagnostics()?.isTwoFactorEnabled ? 'Enabled' : 'Not Enabled' }}
+          </p>
+          <span class="badge alert">
+            {{ diagnostics()?.isTwoFactorEnabled ? 'Fully Protected' : 'Action Recommended' }}
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Deep Diagnostics Row -->
+    <div class="diagnostics-row">
+      <div class="diagnostics-card">
+        <div class="diag-header">
+          <h3>🌐 Active Connection Footprint</h3>
+          <span class="pulse-indicator green"></span>
+        </div>
+
+        <div class="diag-body">
+          <div class="diag-item">
+            <span class="label">Client IP Address</span>
+            <span class="value code">{{ diagnostics()?.ipAddress }}</span>
+          </div>
+          <div class="diag-item">
+            <span class="label">Operating System & Browser</span>
+            <span class="value">{{ diagnostics()?.userAgent }}</span>
+          </div>
+          <div class="diag-item">
+            <span class="label">API Gateway Context</span>
+            <span class="value text-success">Secure HTTPS Tunnel</span>
+          </div>
+        </div>
+      </div>
     </div>
   }
-
-  @if (apiMessage()) {
-    <div style="color: green; padding: 10px; background-color: #e6f7e6; border-radius: 4px; font-weight: bold;">
-      {{ apiMessage() }}
-    </div>
-  }
-
-  <div><Button (click)='RemoveTokens()'>Clear Auth Tokens</Button></div>
 </div>
