@@ -1,10 +1,10 @@
 import { Component, inject, signal } from '@angular/core';
-import { ReactiveFormsModule, FormControl, FormGroup, Validators } from '@angular/forms';
-import { Auth } from '../../../../core/auth/services/auth';
-import { Router } from '@angular/router';
-import { RouterLink } from '@angular/router';
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Router, RouterLink } from '@angular/router';
 import { firstValueFrom } from 'rxjs';
+import { Auth } from '../../../../core/auth/services/auth';
 import { AppWarmUp } from '../../../../core/services/app-warm-up';
+import { LiveCounter } from '../../../../core/services/live-counter';
 @Component({
   selector: 'app-login',
   imports: [ReactiveFormsModule, RouterLink],
@@ -16,6 +16,10 @@ export class LoginPage {
   private router = inject(Router);
 
   protected warmUpService = inject(AppWarmUp)
+
+  protected liveCounterService = inject(LiveCounter);
+  
+  public onlineUsers = this.liveCounterService.onlineCount;
 
   ngOnInit(): void {
     this.warmUpService.initiateWarmUp();
