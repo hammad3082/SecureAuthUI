@@ -1,59 +1,53 @@
-# SecureAuthUI
+# SecureAuth UI 🛡️
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.2.6.
+A modern, high-performance Angular client built to showcase secure authentication flows, federated Single Sign-On (SSO), real-time presence tracking, and system audit logging.
 
-## Development server
+🚀 **Live Demo:** [https://secure-auth-ui-omega.vercel.app/](https://secure-auth-ui-omega.vercel.app/)
 
-To start a local development server, run:
+---
 
-```bash
-ng serve
-```
+## 🎯 Application Flow & Key Features
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+1. **Server Warmup Check:** Initiates an API call on initial page load to wake up free-tier backend servers from cold start while the user navigates the app, displaying "Systems Operational" upon success.
+2. **Real-Time Active User Tracker:** Displays live online user counts using **ASP.NET Core SignalR** over WebSockets, tracking browser sessions via persistent `crypto.randomUUID()`.
+3. **Authentication & Federated SSO:** 
+   * Email/Password login and registration flows.
+   * Federated Single Sign-On via **Google OAuth 2.0** and **AWS Cognito / OIDC**.
+   * Automatic JWT management with refresh token handling.
+4. **Protected Dashboard:** Secured via Angular **Route Guards** and HTTP Interceptors for automated Bearer token injection.
+5. **Audit Logs View:** Interactive security log view to monitor user activity and security events.
 
-## Code scaffolding
+---
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+## 🏗️ Architecture & Technical Stack
 
-```bash
-ng generate component component-name
-```
+* **Framework:** Angular (v21+) with **Standalone Components** and `inject()`.
+* **State & Reactivity:** Fine-grained reactive state managed with Angular **Signals** and targeted **RxJS** pipelines.
+* **Security:** Functional HTTP Interceptors for automated JWT token handling and error recovery.
+* **Real-Time Communication:** Microsoft SignalR Client with auto-reconnect logic.
+* **CI/CD & Hosting:** Decoupled GitHub Actions pipeline deployed to **Vercel**.
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+---
 
-```bash
-ng generate --help
-```
+## 🛠️ Getting Started Locally
 
-## Building
+### Prerequisites
+* **Node.js:** v20+ recommended
+* **Angular CLI:** v21+
 
-To build the project run:
+### Installation & Run
 
-```bash
-ng build
-```
+1. **Clone the repository:**
+   ```bash
+   git clone [https://github.com/hammad3082/SecureAuthUI.git](https://github.com/hammad3082/SecureAuthUI.git)
+   cd SecureAuthUI
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+2. **Install dependencies:**
 
-## Running unit tests
-
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+    To start a local development server, run:
+    
+    ```bash
+    ng serve
+    ```
+  
+    Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
